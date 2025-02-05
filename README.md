@@ -27,3 +27,6 @@ Para criar aplicação rodar o comando *python manage.py startapp nome-app*
 Todo app novo criado precisa ser adicionado no *INSTALLED_APPS* que fica no settings.py
 
 Para criar a model no db rodar *python manage.py makemigrations* *python manage.py migrate*
+
+### API Externa
+Utilizando o https://servicodados.ibge.gov.br/ para pegar dados

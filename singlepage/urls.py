@@ -19,5 +19,5 @@ from django.urls import path
 from carnaval import views as carnaval
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('carnaval/', carnaval.home)  # Essa função é criada dentro do arquvi views.py
+    path('carnaval/', carnaval.home),  # Essa função é criada dentro do arquvi views.py
 ]
