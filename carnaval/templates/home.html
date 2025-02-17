@@ -18,109 +18,15 @@
     <div class="container mt-3 mb-3 box text-center align-items-center">
         <h1>CARNAVAL 2025</h1>
     </div>
+
     <!-- Formulário de busca -->
-    <div class="container box">
-        <div class="row g-3 justify-content-center">
-            <div class="col-12 col-md-4">
-                <div class="input-group">
-                    <label class="input-group-text" for="state">Estado</label>
-                    <select class="form-select" name="state" id="state">
-                        <option selected>Selecione o Estado</option>
-                        {% for state in states %}
-                        <option value="{{state.sigla}}">{{state.nome}}</option>
-                        {% endfor %}
-                    </select>
-                </div>
-            </div>
-            <div class="col-12 col-md-4">
-                <div class="input-group">
-                    <label class="input-group-text" for="city">Município</label>
-                    <select class="form-select" id="city" name="city">
-                        <option selected>Selecione o Município</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="col-12 col-md-4">
-                <div class="input-group">
-                    <label class="input-group-text" for="region">Região</label>
-                    <select class="form-select" id="region">
-                        <option selected>Selecione a Região</option>
-                        <option value="norte">Norte</option>
-                        <option value="sul">Sul</option>
-                        <option value="leste">Leste</option>
-                        <option value="leste">Oeste</option>
-                    </select>
-                </div>
-            </div>
-        </div>
-        <div class="d-grid mt-2 gap-2">
-            <button type="button" class="btn btn-success btn-lg">Buscar</button>
-        </div>
-    </div>
-
-    <!-- Listagem -->
-    <div class="container box mt-3">
-        <div class="row justify-content-center m-3">
-            <div class="col-12 col-md-5 card-custom">
-                <div class="row align-items-center">
-                    <div class="col-3 text-center">
-                        <h5 class="text-date">Fev<br>25</h5>
-                    </div>
-                    <div class="col-7">
-                        <h5 class="card-title">Nome do Evento</h5>
-                        <p class="card-text">Horário</p>
-                        <p class="card-text"><a href="#" class="card-link">Endereço</a></p>
-                    </div>
-                    <div class="col-2 text-center">
-                        <input class="form-check-input" type="checkbox">
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-5 card-custom">
-                <div class="row align-items-center">
-                    <div class="col-3 text-center">
-                        <h5 class="text-date">Fev<br>25</h5>
-                    </div>
-                    <div class="col-7">
-                        <h5 class="card-title">Nome do Evento</h5>
-                        <p class="card-text">Horário</p>
-                        <p class="card-text"><a href="#" class="card-link">Endereço</a></p>
-                    </div>
-                    <div class="col-2 text-center">
-                        <input class="form-check-input" type="checkbox">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="d-grid mt-2 gap-2">
-            <button type="button" class="btn btn-primary btn-lg">Compartilhar</button>
-        </div>
-    </div>
-
-    <!-- Formulario de Compartilhar -->
-    <div class="container box mt-3">
-        <form action="/carnaval/" method="post">{% csrf_token %}
-            <div class="row mb-3">
-                <div class="col-6">
-                    <label class="form-label">Nome do evento</label>
-                    <input type="text" class="form-control" name="formName">
-                </div>
-                <div class="col-3">
-                    <label class="form-label">Data</label>
-                    <input type="date" class="form-control" name="formDate">
-                </div>
-                <div class="col-3">
-                    <label class="form-label">Horario</label>
-                    <input type="number" class="form-control" name="formHours">
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <div class="col-4">
+    <form method="GET" action="{% url 'filter_carnaval_events' %}">
+        <div class="container box">
+            <div class="row g-3 justify-content-center">
+                <div class="col-12 col-md-12">
                     <div class="input-group">
-                        <label class="input-group-text" for="formState">Estado</label>
-                        <select class="form-select" name="formState" id="formState">
+                        <label class="input-group-text" for="state">Estado</label>
+                        <select class="form-select" name="state" id="state">
                             <option selected>Selecione o Estado</option>
                             {% for state in states %}
                             <option value="{{state.sigla}}">{{state.nome}}</option>
@@ -128,37 +34,37 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="input-group">
-                        <label class="input-group-text" for="formCity">Município</label>
-                        <select class="form-select" id="formCity" name="formCity">
-                            <option selected>Selecione o Município</option>
-                        </select>
+            </div>
+            <div class="d-grid mt-2 gap-2">
+                <button type="submit" class="btn btn-success btn-lg">Buscar</button>
+            </div>
+        </div>
+    </form>
+
+    <!-- Listagem -->
+    <div class="container box mt-3">
+        <div class="row justify-content-center m-3">
+            {% for event in events %}
+            <div class="col-12 col-md-5 card-custom">
+                <div class="row align-items-center">
+                    <div class="col-3 text-center">
+                        <h5 class="text-date">{{event.date|date:"M"}} <br> {{event.date|date:"d"}}</h5>
+                    </div>
+                    <div class="col-7">
+                        <h5 class="card-title">{{event.name}}</h5>
+                        <p class="card-text">{{event.hours}}</p>
+                        <p class="card-text"><a target="_blank" href="https://www.google.com/maps/search/?api=1&query={{event.location}}" class="card-link">{{event.location}}</a></p>
+                    </div>
+                    <div class="col-2 text-center">
+                        <input class="form-check-input" type="checkbox">
                     </div>
                 </div>
-                <div class="col-4">
-                    <div class="input-group">
-                        <label class="input-group-text" for="formRegion">Região</label>
-                        <select class="form-select" id="formRegion" name="formRegion">
-                            <option selected>Selecione a Região</option>
-                            <option value="norte">Norte</option>
-                            <option value="sul">Sul</option>
-                            <option value="leste">Leste</option>
-                            <option value="leste">Oeste</option>
-                        </select>
-                    </div>
-                </div>
             </div>
-            <div class="row mb-3">
-                <div class="col-12">
-                    <label class="form-label">Endereço</label>
-                    <input type="text" class="form-control" name="formLocation">
-                </div>
-            </div>
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary btn-lg">Enviar</button>
-            </div>
-        </form>
+            {% endfor %}
+        </div>
+        <div class="d-grid mt-2 gap-2">
+            <button type="button" class="btn btn-primary btn-lg">Compartilhar</button>
+        </div>
     </div>
 </body>
 

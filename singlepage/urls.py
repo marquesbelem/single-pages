@@ -17,7 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from carnaval import views as carnaval
+from singlepage import views as main
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', main.home),
     path('carnaval/', carnaval.home),  # Essa função é criada dentro do arquvi views.py
+    path('filter-carnaval-events/', carnaval.filter_carnaval_events, name='filter_carnaval_events'), 
 ]

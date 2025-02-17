@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'carnaval',
+    'singlepage'
 ]
 
 MIDDLEWARE = [
@@ -104,13 +105,12 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
-
-USE_I18N = True
-
-USE_TZ = True
+TIME_ZONE = 'America/Sao_Paulo'
+USE_I18N = True  # Ativa internacionalização
+USE_L10N = True  # Ativa localização (formatação de datas, números, etc.)
+USE_TZ = True    # Usa fuso horário
 
 
 # Static files (CSS, JavaScript, Images)

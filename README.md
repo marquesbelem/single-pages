@@ -12,6 +12,13 @@ rodar o comando *django-admin startproject nome-projeto .*
 rodar o *. venv/Scripts/activate* para ativar o ambiente virtual
 rodar o comando *python manage.py runserver*
 
+## Painel de Admin 
+O painel de administração do Django só pode ser acessado por usuários com permissões de superusuário. Para criar um superusuário, execute o seguinte comando no terminal:
+*python manage.py createsuperuser*
+
+### Personalizando o Painel de Administração 
+Para personalizar o painel de administração para gerenciar seus modelos (como o modelo Evento que você criou), registre o modelo no arquivo **admin.py** do seu aplicativo
+
 ## Arquitetura do projeto 
 
 ### Pasta principal: Single Page
